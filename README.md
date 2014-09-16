@@ -1,6 +1,6 @@
 ### Clone sources to your own virtual machine
 
- git clone https://github.com/jvanhalen/mediaplayer.git
+`git clone https://github.com/jvanhalen/mediaplayer.git`
 
 ### Music from opengameart.org
 
