@@ -34,7 +34,6 @@ router.get('/', function(req, res) {
 router.get('/api', function(req, res) {
     //res.json({ message: 'hooray! welcome to our api!' });
   var mysql      = require('mysql');
-
   var connection = mysql.createConnection(process.env.OPENSHIFT_MYSQL_DB_URL + 'mediaplayer');
 
   connection.connect();
@@ -49,7 +48,7 @@ router.get('/api', function(req, res) {
     for(var solution in rows) {
       //console.log('Table', solution + ': ', rows[solution].Tables_in_mediaplayer);
       //res.json({ message: 'hooray! welcome to our api!' });
-      dbresp += 'Table ' + solution + ': ' + rows[solution].Tables_in_mediaplayer;
+      dbresp += 'Tables: ' + rows[solution].Tables_in_mediaplayer + ' | ';
     }
     res.json({ message: dbresp });
   });
