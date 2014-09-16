@@ -2,6 +2,12 @@
 
 `git clone https://github.com/jvanhalen/mediaplayer.git`
 
+### Install MySQL 
+
+`sudo apt-get install mysql-server`
+
+Set root password to 'test1234'.
+
 ### Music from opengameart.org
 
 http://opengameart.org/content/epic-fantasy-music
