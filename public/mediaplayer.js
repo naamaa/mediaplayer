@@ -15,6 +15,7 @@ var Mediaplayer = function() {
 
 	initMediaplayer();
 
+	/*
 	// Create timer to show mediaplayer UI
 	var timeout = 1;
 
@@ -32,8 +33,8 @@ var Mediaplayer = function() {
 			// Show mediaplayer UI
 			showMediaplayer();
 		}
-	}, 1000);
-	
+	}, 1000); */
+	showMediaplayer();
 
 	function initMediaplayer() {
 		document.getElementById('btnPlay').addEventListener('click', playMusic, false);
