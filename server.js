@@ -5,26 +5,6 @@
 // mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
 // OPENSHIFT_MYSQL_DB_URL
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'test1234',
-  database : 'mediaplayer'
-});
-
-connection.connect();
-
-connection.query('SHOW TABLES', function(err, rows, fields) {
-	console.log("rows:", rows);
-  if (err) throw err;
-  for(var solution in rows) {
-  	console.log('Table', solution + ': ', rows[solution].Tables_in_mediaplayer);
-  }
-});
-
-connection.end();
-
 // BASE SETUP
 // =============================================================================
 
@@ -52,11 +32,32 @@ router.get('/', function(req, res) {
 });
 
 router.get('/api', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });
+    //res.json({ message: 'hooray! welcome to our api!' });
+  var mysql      = require('mysql');
+  var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'test1234',
+    database : 'mediaplayer'
+  });
+
+  connection.connect();
+
+  connection.query('SHOW TABLES', function(err, rows, fields) {
+    console.log("rows:", rows);
+    if (err) throw err;
+    for(var solution in rows) {
+      //console.log('Table', solution + ': ', rows[solution].Tables_in_mediaplayer);
+      //res.json({ message: 'hooray! welcome to our api!' });
+      var dbdata = 'Table ' + solution + ': ' + rows[solution].Tables_in_mediaplayer;
+      res.json({ message: dbdata});
+    }
+  });
+
+  connection.end();
 });
 
 // more routes for our API will happen here
-
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/', router);
