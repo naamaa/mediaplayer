@@ -34,24 +34,24 @@ router.get('/', function(req, res) {
 router.get('/api', function(req, res) {
     //res.json({ message: 'hooray! welcome to our api!' });
   var mysql      = require('mysql');
-  var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'test1234',
-    database : 'mediaplayer'
-  });
+
+  var connection = mysql.createConnection(process.env.OPENSHIFT_MYSQL_DB_URL + 'mediaplayer');
 
   connection.connect();
 
   connection.query('SHOW TABLES', function(err, rows, fields) {
     console.log("rows:", rows);
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    var dbresp;
     for(var solution in rows) {
       //console.log('Table', solution + ': ', rows[solution].Tables_in_mediaplayer);
       //res.json({ message: 'hooray! welcome to our api!' });
-      var dbdata = 'Table ' + solution + ': ' + rows[solution].Tables_in_mediaplayer;
-      res.json({ message: dbdata});
+      dbresp += 'Table ' + solution + ': ' + rows[solution].Tables_in_mediaplayer;
     }
+    res.json({ message: dbresp });
   });
 
   connection.end();
@@ -68,3 +68,4 @@ app.use(express.static(__dirname + '/'));
 // =============================================================================
 app.listen(port, ipaddress);
 console.log('Magic happens on ' + 'http://' + ipaddress +':'+ port);
+console.log('Magic happens on ' + 'http://' + ipaddress +':'+ port + '/api');

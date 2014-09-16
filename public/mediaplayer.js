@@ -14,7 +14,7 @@ var Mediaplayer = function() {
 					"public/media/Soliloquy_1.mp3"];
 
 	initMediaplayer();
-/*
+
 	// Create timer to show mediaplayer UI
 	var timeout = 1;
 
@@ -34,7 +34,7 @@ var Mediaplayer = function() {
 		}
 	}, 1000);
 	
-	*/
+	
 	showMediaplayer();
 	
 	function initMediaplayer() {
