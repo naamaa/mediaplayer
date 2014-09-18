@@ -14,7 +14,7 @@ var Mediaplayer = function() {
 					"public/media/Soliloquy_1.mp3"];
 
 	initMediaplayer();
-
+/*
 	// Create timer to show mediaplayer UI
 	var timeout = 1;
 
@@ -34,7 +34,7 @@ var Mediaplayer = function() {
 		}
 	}, 1000);
 	
-	
+	*/
 	showMediaplayer();
 	
 	function initMediaplayer() {
@@ -61,15 +61,15 @@ var Mediaplayer = function() {
 			});
 
 			audio.addEventListener('loadstart', function() {
-				console.log("loadstart", this.src);
+				//console.log("loadstart", this.src);
 			});
 
 			audio.addEventListener('suspend', function() {
-				console.log("loadstart", this.src);
+				//console.log("loadstart", this.src);
 			});
 			
 			audio.addEventListener('progress', function() {
-				console.log("progress", this.src);
+				//console.log("progress", this.src);
 			});
 /*
 			audio.addEventListener('canplay', function() {

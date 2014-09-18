@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
 router.get('/api', function(req, res) {
     //res.json({ message: 'hooray! welcome to our api!' });
   var mysql      = require('mysql');
-  var conn     = (process.env.OPENSHIFT_MYSQL_DB_URL || 'mysql://root:test1234@localhost/') + 'mediaplayer';
+  var conn 		 = (process.env.OPENSHIFT_MYSQL_DB_URL || 'mysql://root:test1234@localhost/') + 'mediaplayer';
   var connection = mysql.createConnection(conn);
 
   connection.connect();
@@ -57,6 +57,19 @@ router.get('/api', function(req, res) {
   connection.end();
 });
 
+/* Handle login POST request */
+router.post('/api/login', function(req, res) {
+  console.log("some login data just arrived:", req.body);
+  if(undefined !== (req.body.password) &&  undefined !== req.body.username) {
+    // TODO get personal playlist from database
+    res.json({login: 'ok', playlist: [{title: "Kesämopo", artist: "Sleepy Sleepers"}, {title: "Africa", artist: "Toto"}]});
+  }
+  else {
+    res.json({login: 'failed'});
+  }
+
+});
+
 // more routes for our API will happen here
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
@@ -69,3 +82,4 @@ app.use(express.static(__dirname + '/'));
 app.listen(port, ipaddress);
 console.log('Magic happens on ' + 'http://' + ipaddress +':'+ port);
 console.log('Magic happens on ' + 'http://' + ipaddress +':'+ port + '/api');
+console.log('Magic happens on ' + 'http://' + ipaddress +':'+ port + '/api/login');
