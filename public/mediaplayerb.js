@@ -1,12 +1,24 @@
 /* Create mediaplayer object */
 
-var Mediaplayer = function(playlist) {
+var Mediaplayer = function() {
 
 	var player = document.getElementById('player');
 
-	initMediaplayer();
+	/*var playlist = ["http://opengameart.org/sites/default/files/Soliloquy_1.mp3",
+					"http://opengameart.org/sites/default/files/Arabesque.mp3",
+					"http://opengameart.org/sites/default/files/Gran%20Batalla.mp3",
+					"http://opengameart.org/sites/default/files/Carnegieo.ogg",
+					"http://opengameart.org/sites/default/files/Sigil_3.ogg",
+					"http://opengameart.org/sites/default/files/sadorchestralbgm%28syncopika%29.wav",
+					"http://opengameart.org/sites/default/files/catinspace_hq.mp3",
+					"public/media/Soliloquy_1.mp3"];
+	*/
+	
 
-	/*// Create timer to show mediaplayer UI
+
+	initMediaplayer();
+/*
+	// Create timer to show mediaplayer UI
 	var timeout = 1;
 
 	// Show the initial timeout
@@ -23,10 +35,13 @@ var Mediaplayer = function(playlist) {
 			// Show mediaplayer UI
 			showMediaplayer();
 		}
-	}, 1000); */
+	}, 1000);
+	
+	*/
 	showMediaplayer();
+	
 	function initMediaplayer() {
-		 $("#btnPlay").click(playMusic);
+		$("#btnPlay").click(playMusic);
 		 $("#btnPause").click(pauseMusic);
 		 $("#btnStop").click(stopMusic);
 		 $("#btnVolUp").click(volumeUp);
@@ -36,13 +51,12 @@ var Mediaplayer = function(playlist) {
 	function showMediaplayer() {
 		var temp = [];
 		var songs = '<table><tr><th>#</th><th>Song</th><th>Duration</th></tr>'
-		var songcounter = 0;
-
+		
 		for(var song in playlist) {
 			var audio = new Audio();
-			audio.src = playlist[song].linkki;
+			audio.src = playlist[song];
 			audio.songId = song;
-			songs += '<tr class="selectable"><td><b>' + song + '</b></td><td onclick="myPlayer.selectSong(\'' + song+ '\')"">' + playlist[song].artisti + " - " + playlist[song].nimi + '</td><td id="song' + song + '"></td></tr>';
+			songs += '<tr class="selectable"><td><b>' + song + '</b></td><td onclick="myPlayer.selectSong(\'' + song + '\')"">' + playlist[song] + '</td><td id="song' + song + '"></td></tr>'; 
 			audio.addEventListener('loadedmetadata', function() {
 				// Say something about the EventListener scope
 				var duration = this.duration;
@@ -66,7 +80,7 @@ var Mediaplayer = function(playlist) {
 				console.log("playable");
 				document.getElementById('canplay'+this.songId).innerHTML = "X";
 			});
-*/		
+*/
 		}
 		songs += '</table>';
 
@@ -79,7 +93,7 @@ var Mediaplayer = function(playlist) {
 
 	this.selectSong = function (songId) {
 		console.log("selected:", playlist[songId]);
-		player.src = playlist[songId].linkki;
+		player.src = playlist[songId];
 		player.play();
 	}
 

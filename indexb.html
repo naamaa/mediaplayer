@@ -44,27 +44,28 @@
 
             window.onload = function() {
                 // Create mediaplayer object
+
+                myPlayer = new Mediaplayer();
+
                 var jqxhr = $.get( "api/", function(data) {
-                                        // TODO: show initial playlist
                 var playlist = data.playlist;
 
                     for(var song in playlist){
-                    console.log("Adding song:", playlist[song].nimi + " by " + playlist[song].artisti);
+                    console.log("Adding song:", playlist[song].nimi);
+                    //console.log("Adding song:", playlist[song].nimi + " by " + playlist[song].artisti);
                     }
-                                    
-                    myPlayer = new Mediaplayer(playlist);
-
+                
                 });
 
-                /* Login submuit function */
+                /* Login submit function */
                 $("#btnLogin").click(function(){
                     var username = document.getElementById('username').value;
                     var password = CryptoJS.SHA1(document.getElementById('password').value).toString();
+
                     $.post("api/login",
                             {username: username,
                             password: password},
                             function(data,status, jqXHR){
-                                // TODO: show personal playlist after successful login
                                 window.alert("login: "+data.login);
 
                                 var login  = data.login;
@@ -77,10 +78,9 @@
                                 console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
                                 
                                 for(var song in playlist) {
-                                    console.log("Adding song:", playlist[song].nimi + " by " + playlist[song].artisti);
+                                    console.log("Adding song:", playlist[song].nimi);
                                 }
                                 myPlayer = new Mediaplayer(playlist);
-
                             }, "json");
                     });
                 };
