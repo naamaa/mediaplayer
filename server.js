@@ -1,5 +1,5 @@
 // server.js
-
+// lol 
 // MYSQL connection
 
 // mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
